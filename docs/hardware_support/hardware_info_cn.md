@@ -27,29 +27,29 @@
 | AI 加速卡 | XPU | 昆仑芯 | P800 | [使用指南](https://github.com/PaddlePaddle/FastDeploy/tree/develop/docs/get_started/installation/kunlunxin_xpu.md) |
 | AI 加速卡 | | 燧原 | S60 | [使用指南](https://github.com/PaddlePaddle/FastDeploy/tree/develop/docs/get_started/installation/Enflame_gcu.md)  |
 | AI 加速卡 | GPGPU | 天数 | 天垓 150 | [使用指南](https://github.com/PaddlePaddle/FastDeploy/tree/develop/docs/get_started/installation/iluvatar_gpu.md) |
-| AI 加速卡 | GPGPU | 海光 | K100_AI | 适配中 |
-| AI 加速卡 | 达芬奇 | 昇腾 | 910 系列 | 适配中 |
-| AI 加速卡 | GPGPU | 沐曦 | 曦云 C 系列 | 适配中 |
+| AI 加速卡 | GPGPU | 海光 | K100_AI | [使用指南](https://github.com/PaddlePaddle/FastDeploy/blob/develop/docs/get_started/installation/hygon_dcu.md) |
+| AI 加速卡 | GPGPU | 沐曦 | 曦云 C 系列 | [使用指南](https://github.com/PaddlePaddle/FastDeploy/blob/develop/docs/get_started/installation/metax_gpu.md) |
+| AI 加速卡 | Gaudi | Intel | Gaudi 2 | [使用指南](https://github.com/PaddlePaddle/FastDeploy/blob/develop/docs/get_started/installation/intel_gaudi.md) |
 
 
 ## Paddle Inference
 
 |  分类  | 架构 | 公司 | 型号 | 预编译库 | 源码编译 |  完全支持推理 | 支持部分模型 |
 |  ----  | ----  | ---- | ---- |---- | ---- |---- | ---- |
-| 服务端 CPU | x86 | Intel | 常见 CPU 型号如 Xeon、Core 全系列以及 NUC | [预编译库](https://paddleinference.paddlepaddle.org.cn/user_guides/download_lib.html) | [源码编译](https://paddleinference.paddlepaddle.org.cn/user_guides/source_compile.html) | ✔️ |   |
-| 服务端 GPU |  | NVIDIA | Ada Lovelace、Hopper、 Ampere、Turing、 Volta 架构  | [预编译库](https://paddleinference.paddlepaddle.org.cn/user_guides/download_lib.html) | [源码编译](https://paddleinference.paddlepaddle.org.cn/user_guides/source_compile.html) | ✔️ |   |
-| 移动端 GPU |  | NVIDIA | Jetson 系列 | [预编译库](https://paddleinference.paddlepaddle.org.cn/user_guides/download_lib.html) | [源码编译](https://paddleinference.paddlepaddle.org.cn/user_guides/source_compile.html) | ✔️ |   |
+| 服务端 CPU | x86 | Intel | 常见 CPU 型号如 Xeon、Core 全系列以及 NUC | [预编译库](https://www.paddlepaddle.org.cn/inference/master/guides/install/download_lib.html) | [源码编译](https://www.paddlepaddle.org.cn/inference/master/guides/install/compile/source_compile.html) | ✔️ |   |
+| 服务端 GPU |  | NVIDIA | Ada Lovelace、Hopper、 Ampere、Turing、 Volta 架构  | [预编译库](https://www.paddlepaddle.org.cn/inference/master/guides/install/download_lib.html) | [源码编译](https://www.paddlepaddle.org.cn/inference/master/guides/install/compile/source_compile.html) | ✔️ |   |
+| 移动端 GPU |  | NVIDIA | Jetson 系列 | [预编译库](https://www.paddlepaddle.org.cn/inference/master/guides/install/download_lib.html) | [源码编译](https://www.paddlepaddle.org.cn/inference/master/guides/install/compile/source_compile.html) | ✔️ |   |
 | AI 加速芯片 | 达芬奇 | 华为 | 昇腾 910 系列 | | [源码编译](./npu/install_cn.html) |  | ✔️ |
 | AI 加速芯片 | MLU | 寒武纪 | MLU370 系列 | | [源码编译](./mlu/install_cn.html) |  | ✔️ |
 | AI 加速芯片 | MUSA | 摩尔线程 | MTT S 系列 GPU |  |  |  |  |
 | AI 加速芯片 | GPGPU | 海光 | 海光 Z100 系列 | | [源码编译](https://www.paddlepaddle.org.cn/inference/master/guides/hardware_support/dcu_hygon_cn.html) | | [支持模型](./dcu/support_cn.html) |
 | AI 加速芯片 | XPU | 昆仑芯 | 昆仑芯 R200、R300 等 | | [源码编译](https://www.paddlepaddle.org.cn/inference/master/guides/hardware_support/xpu_kunlun_cn.html) |  | [支持模型](./xpu/support_cn.html) |
-| 服务端 CPU | ARM | 飞腾 | FT-2000+/64、S2500 |  |[源码编译](../../install/compile/arm-compile.html#anchor-1) |  |  |
+| 服务端 CPU | ARM | 飞腾 | FT-2000+/64、S2500、S5000C-64 |  |[源码编译](../../install/compile/arm-compile.html#anchor-1) |  |  |
 | 服务端 CPU | ARM | 华为 | 鲲鹏 920 2426SK |  |[源码编译](../../install/compile/arm-compile.html) |  |   |
 | 服务端 CPU | MIPS | 龙芯 | 龙芯 3A4000、3A5000、3C5000L |  |[源码编译](../../install/compile/mips-compile.html#anchor-0) |  |  |
-| 服务端 CPU | x86 | 兆芯 | 全系列 CPU |  |[源码编译](../../install/compile/zhaoxin-compile.html#anchor-1) |  |  |
+| 服务端 CPU | x86 | 兆芯 | 全系列 CPU（KH-40000、KH-50000、KX-7000 等） |  |[源码编译](../../install/compile/zhaoxin-compile.html#anchor-1) |  |  |
 | 服务端 CPU |  | 海光 | 海光 3000、5000、7000 系列 CPU |  |  |  |  |
-| 服务端 CPU |  | 申威 | 申威 SW6A、SW6B |  |[源码编译](https://paddleinference.paddlepaddle.org.cn/user_guides/compile_SW.html)  |  |  |
+| 服务端 CPU |  | 申威 | 申威 SW6A、SW6B、威鑫 3231、威鑫 H8000 |  |[源码编译](../../install/compile/sw-compile.html)  |  |  |
 | AI 加速芯片 | | 燧原 | S60 | | [源码编译](./gcu/install_cn.html) |  | ✔️ |
 
 ## Paddle Lite

@@ -3,12 +3,12 @@
 Normal
 -------------------------------
 
-.. py:class:: paddle.distribution.Normal(loc, scale, name=None)
+.. py:class:: paddle.distribution.Normal(loc, scale, validate_args=None, name=None)
 
 
 正态分布
 
-若 `loc` 是实数，概率密度函数为：
+若 ``loc`` 是实数，概率密度函数为：
 
 .. math::
 
@@ -16,7 +16,7 @@ Normal
 
     Z = (2 \pi \sigma^2)^{0.5}
 
-若 `loc` 是复数，概率密度函数为：
+若 ``loc`` 是复数，概率密度函数为：
 
 .. math::
 
@@ -35,6 +35,7 @@ Normal
 
     - **loc** (int|float|complex|list|tuple|numpy.ndarray|Tensor) - 正态分布平均值。数据类型为 float32、float64、complex64 或 complex128。
     - **scale** (int|float|list|tuple|numpy.ndarray|Tensor) - 正态分布标准差。数据类型为 float32 或 float64。
+    - **validate_args** (bool|None，可选) - 是否对输入参数进行校验。默认值为 None。
     - **name** (str，可选) - 具体用法请参见 :ref:`api_guide_Name`，一般无需设置，默认值为 None。
 
 代码示例
@@ -68,7 +69,7 @@ sample(shape=[], seed=0)
 
 **参数**
 
-    - **shape** (Sequence[int], 可选) - 指定生成样本的维度。
+    - **shape** (Sequence[int], 可选) - 指定生成样本的维度。别名 ``sample_shape``。
     - **seed** (int) - 长整型数。
 
 **返回**
@@ -82,7 +83,7 @@ rsample(shape=[])
 
 **参数**
 
-    - **shape** (Sequence[int], 可选) - 指定生成样本的维度。
+    - **shape** (Sequence[int], 可选) - 指定生成样本的维度。别名 ``sample_shape``。
 
 **返回**
 

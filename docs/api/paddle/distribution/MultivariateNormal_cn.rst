@@ -3,7 +3,7 @@
 MultivariateNormal
 -------------------------------
 
-.. py:class:: paddle.distribution.MultivariateNormal(loc, covariance_matrix=None, precision_matrix=None, scale_tril=None)
+.. py:class:: paddle.distribution.MultivariateNormal(loc, covariance_matrix=None, precision_matrix=None, scale_tril=None, validate_args=None)
 
 
 MultivariateNormal 是一种定义在实数域上的多元连续型概率分布，参数 :attr:`loc` 表示均值，以及需要传入以下任意一种矩阵描述其方差：
@@ -25,13 +25,15 @@ MultivariateNormal 是一种定义在实数域上的多元连续型概率分布�
 参数
 :::::::::
 
-    - **loc** (int|float|Tensor) - 即上述公式中 :math:`\mu` 参数，是 MultivariateNormal 的均值向量。如果 :attr:`loc` 的输入数据类型是 `int` 或 `float` 则会被转换为数据类型为 paddle 全局默认数据类型的 1-D Tensor。
+    - **loc** (int|float|Tensor) - 即上述公式中 :math:`\mu` 参数，是 MultivariateNormal 的均值向量。如果 :attr:`loc` 的输入数据类型是 ``int`` 或 ``float`` 则会被转换为数据类型为 paddle 全局默认数据类型的 1-D Tensor。
 
     - **covariance_matrix** (Tensor，可选) - 即上述公式中 :math:`\mu` 参数，是 MultivariateNormal 的协方差矩阵。:attr:`covariance_matrix` 的数据类型会被转换为与 :attr:`loc` 相同的类型。默认值为 None。
 
     - **precision_matrix** (Tensor，可选) - 是 MultivariateNormal 协方差矩阵的逆矩阵。:attr:`precision_matrix` 的数据类型会被转换为与 :attr:`loc` 相同的类型。默认值为 None。
 
     - **scale_tril** (Tensor，可选) - 是 MultivariateNormal 协方差矩阵的柯列斯基分解的下三角矩阵。:attr:`scale_tril` 的数据类型会被转换为与 :attr:`loc` 相同的类型。默认值为 None。
+
+    - **validate_args** (bool|None，可选) - 是否对输入参数进行校验。默认值为 None。
 
 
 代码示例
@@ -60,6 +62,15 @@ MultivariateNormal 分布的方差
 
 Tensor，方差
 
+mode
+'''''''''
+
+MultivariateNormal 分布的众数
+
+**返回**
+
+Tensor，众数
+
 方法
 :::::::::
 
@@ -74,7 +85,7 @@ prob(value)
 
 **返回**
 
-Tensor，:attr:`value` 的概率。数据类型与 `self.loc` 相同。
+Tensor，:attr:`value` 的概率。数据类型与 ``self.loc`` 相同。
 
 
 log_prob(value)
@@ -88,13 +99,13 @@ log_prob(value)
 
 **返回**
 
-Tensor，:attr:`value` 的对数概率。数据类型与 `self.loc` 相同。
+Tensor，:attr:`value` 的对数概率。数据类型与 ``self.loc`` 相同。
 
 
 sample(shape=[])
 '''''''''
 
-从 MultivariateNormal 分布中生成满足特定形状的样本数据。最终生成样本形状为  ``sample_shape + batch_shape + event_shape``  。
+从 MultivariateNormal 分布中生成满足特定形状的样本数据。最终生成样本形状为 ``sample_shape + batch_shape + event_shape`` 。
 
 **参数**
 
@@ -102,13 +113,13 @@ sample(shape=[])
 
 **返回**
 
-Tensor，样本数据。其维度为 :math:`\text{sample shape} + \text{batch shape} + \text{event shape}` 。数据类型与 `self.loc` 相同。
+Tensor，样本数据。其维度为 :math:`\text{sample shape} + \text{batch shape} + \text{event shape}` 。数据类型与 ``self.loc`` 相同。
 
 
 rsample(shape=[])
 '''''''''
 
-重参数化采样，生成指定维度的样本。最终生成样本形状为  ``sample_shape + batch_shape + event_shape``  。
+重参数化采样，生成指定维度的样本。最终生成样本形状为 ``sample_shape + batch_shape + event_shape`` 。
 
 **参数**
 
@@ -116,7 +127,7 @@ rsample(shape=[])
 
 **返回**
 
-Tensor，样本数据。其维度为 :math:`\text{sample shape} + \text{batch shape} + \text{event shape}` 。数据类型与 `self.loc` 相同。
+Tensor，样本数据。其维度为 :math:`\text{sample shape} + \text{batch shape} + \text{event shape}` 。数据类型与 ``self.loc`` 相同。
 
 
 entropy()
@@ -130,7 +141,7 @@ entropy()
 
 **返回**
 
-多元正态分布的信息熵，数据类型与 `self.loc` 相同。
+多元正态分布的信息熵，数据类型与 ``self.loc`` 相同。
 
 
 kl_divergence(other)
@@ -148,4 +159,4 @@ kl_divergence(other)
 
 **返回**
 
-相对于另一个多元正态分布的 KL 散度，数据类型与 `self.loc` 相同。
+相对于另一个多元正态分布的 KL 散度，数据类型与 ``self.loc`` 相同。

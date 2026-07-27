@@ -1,4 +1,5 @@
 [tool.ruff]
+extend-exclude = ["*.md"]
 line-length = 80
 target-version = "py39"
 
@@ -109,6 +110,8 @@ ignore = [
     "E741",
     "F841",
     "UP015",
+    "FURB110",
+    "FURB171",
 ]
 
 [tool.ruff.lint.isort]

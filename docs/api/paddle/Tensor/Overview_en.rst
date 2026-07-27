@@ -100,6 +100,7 @@ Methods
     clear_gradient
     clip
     clip_
+    clamp_
     clone
     combinations
     concat
@@ -237,6 +238,7 @@ Methods
     reshape
     reshape_
     resize_
+    retain_grad
     reverse
     roll
     round
@@ -263,6 +265,7 @@ Methods
     sort
     sparse_dim
     split
+    sparse_mask
     sqrt
     sqrt_
     square

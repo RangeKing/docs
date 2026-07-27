@@ -5,7 +5,7 @@ bitwise_left_shift
 
 .. py:function:: paddle.bitwise_left_shift(x, y, is_arithmetic=True, out=None, name=None)
 
-对 Tensor  ``x``  和  ``y``  逐元素进行  ``按位算术(或逻辑)左移``  运算。
+对 Tensor ``x`` 和 ``y`` 逐元素进行 ``按位算术(或逻辑)左移`` 运算。
 
 关于 **有符号数的符号位** 在不同情景下的行为：
   1. 算术左移时，符号位同其他位一样，一起左移，右边补 0；
@@ -42,22 +42,22 @@ bitwise_left_shift
         Out = X \ll Y
 
 .. note::
-     ``paddle.bitwise_left_shift``  遵守 broadcasting，如您想了解更多，请参见 `Tensor 介绍`_ .
+    ``paddle.bitwise_left_shift`` 遵守 broadcasting，如您想了解更多，请参见 `Tensor 介绍`_ .
 
     .. _Tensor 介绍: ../../guides/beginner/tensor_cn.html#id7
 参数
 ::::::::::::
 
-        - **x** （Tensor）- 输入的 N-D `Tensor`，数据类型为：uint8，int8，int16，int32，int64。
-        - **y** （Tensor）- 输入的 N-D `Tensor`，数据类型为：uint8，int8，int16，int32，int64。
+        - **x** （Tensor）- 输入的 N-D ``Tensor``，数据类型为：uint8，int8，int16，int32，int64。别名 ``input``。
+        - **y** （Tensor）- 输入的 N-D ``Tensor``，数据类型为：uint8，int8，int16，int32，int64。别名 ``other``。
         - **is_arithmetic** （bool） - 用于表明是否执行算术位移，True 表示算术位移，False 表示逻辑位移。默认值为 True，表示算术位移。
-        - **out** （Tensor，可选）- 输出的结果 `Tensor`，是与输入数据类型相同的 N-D `Tensor`。默认值为 None，此时将创建新的 Tensor 来保存输出结果。
+        - **out** （Tensor，可选）- 输出的结果 ``Tensor``，是与输入数据类型相同的 N-D ``Tensor``。默认值为 None，此时将创建新的 Tensor 来保存输出结果。
         - **name** (str，可选) - 具体用法请参见 :ref:`api_guide_Name`，一般无需设置，默认值为 None。
 
 
 返回
 ::::::::::::
-  ``按位算术(逻辑)左移``  运算后的结果  ``Tensor`` ，数据类型与  ``x``  相同。
+ ``按位算术(逻辑)左移`` 运算后的结果 ``Tensor``，数据类型与 ``x`` 相同。
 
 代码示例 1
 ::::::::::::

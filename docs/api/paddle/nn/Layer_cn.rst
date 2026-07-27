@@ -27,13 +27,17 @@ COPY-FROM: paddle.nn.Layer
 ::::::::::::
 
 
-train()
+train(mode=True)
 '''''''''
 
 将此层及其所有子层设置为训练模式。这只会影响某些模块，如 Dropout 和 BatchNorm。
 
+**参数**
+
+    - **mode** (bool，可选) - 是否设置为训练模式。默认值为 True。
+
 **返回**
-Layer (返回网络层)， self (返回自身)
+Layer (返回网络层)，self (返回自身)
 
 **代码示例**
 
@@ -54,7 +58,7 @@ COPY-FROM: paddle.nn.Layer.eval
 apply(fn)
 '''''''''
 
-将一个函数 fn 递归地应用到网络的每一个子层(即在函数的  ``.sublayers()``  中返回的子层)以及模块自身。该方法通常用来初始化一个模型中的参数。
+将一个函数 fn 递归地应用到网络的每一个子层(即在函数的 ``.sublayers()`` 中返回的子层)以及模块自身。该方法通常用来初始化一个模型中的参数。
 
 **参数**
 
@@ -70,7 +74,7 @@ COPY-FROM: paddle.nn.Layer.apply
 full_name()
 '''''''''
 
-Layer 的全名。组成方式为： ``name_scope``  + “/” + MyLayer.__class__.__name__ 。
+Layer 的全名。组成方式为：``name_scope`` + “/” + MyLayer.__class__.__name__ 。
 
 **返回**
 str， Layer 的全名
@@ -79,41 +83,49 @@ str， Layer 的全名
 
 COPY-FROM: paddle.nn.Layer.full_name
 
-register_forward_pre_hook(hook)
+register_forward_pre_hook(hook, *, prepend=False, with_kwargs=False)
 '''''''''
 
-为 Layer 注册一个  ``forward pre-hook``  函数，该  ``hook``  函数将会在  ``forward``  函数调用之前被调用。
+为 Layer 注册一个 ``forward pre-hook`` 函数，该 ``hook`` 函数将会在 ``forward`` 函数调用之前被调用。
 
- ``hook``  函数具有以下形式：它的  ``input``  是  ``Layer``  的  ``input`` ，并且可以返回一个元组或者单个修改值；如果返回单个修改值，则将值包装到一个元组中。用户可以使用该函数来查看或修改  ``Layer``   ``forward``  函数的输入。
+``hook`` 函数具有以下形式：它的 ``input`` 是 ``Layer`` 的 ``input``，并且可以返回一个元组或者单个修改值；如果返回单个修改值，则将值包装到一个元组中。用户可以使用该函数来查看或修改 ``Layer`` ``forward`` 函数的输入。
 
 hook(Layer, input) -> None or modified input
 
 **参数**
 
-    - **hook** (function) - 被注册为  ``forward pre-hook``  的函数
+    - **hook** (function) - 被注册为 ``forward pre-hook`` 的函数
+    - **prepend** (bool，可选) - 若为 True，则该 hook 会在已有的 ``forward pre-hook`` 之前执行。默认值：False。
+    - **with_kwargs** (bool，可选) - 若为 True，则调用 ``forward`` 时传入的关键字参数也会传递给该 hook。默认值：False。
 
 **返回**
-HookRemoveHelper，可通过调用  ``hook_remove_helper.remove()``  来删除注册的 hook 函数。
+HookRemoveHelper，可通过调用 ``hook_remove_helper.remove()`` 来删除注册的 hook 函数。
 
 **代码示例**
 
 COPY-FROM: paddle.nn.Layer.register_forward_pre_hook
 
-register_forward_post_hook(hook)
+register_forward_post_hook(hook, *, prepend=False, with_kwargs=False, always_call=False)
 '''''''''
 
-为 Layer 注册一个  ``forward post-hook``  函数，该  ``hook``  函数将会在  ``forward``  函数调用之后被调用。
+为 Layer 注册一个 ``forward post-hook`` 函数，该 ``hook`` 函数将会在 ``forward`` 函数调用之后被调用。
 
- ``hook``  函数具有以下形式，它的  ``input``  和  ``output``  是  ``Layer``  的  ``input``  和  ``output`` 。用户可以用该函数来查看和修改  ``Layer``   ``forward``  函数的输出。
+``hook`` 函数具有以下形式，它的 ``input`` 和 ``output`` 是 ``Layer`` 的 ``input`` 和 ``output``。用户可以用该函数来查看和修改 ``Layer`` ``forward`` 函数的输出。
 
 hook(Layer, input, output) -> None or modified output
 
 **参数**
 
-    - **hook** (function) - 被注册为  ``forward post-hook``  的函数
+    - **hook** (function) - 被注册为 ``forward post-hook`` 的函数
+    - **prepend** (bool，可选) - 若为 True，则该 hook 会在已有的 ``forward post-hook`` 之前执行。默认值：False。
+    - **with_kwargs** (bool，可选) - 若为 True，则调用 ``forward`` 时传入的关键字参数也会传递给该 hook。默认值：False。
+    - **always_call** (bool，可选) - 若为 True，则无论 ``forward`` 是否抛出异常，都会尝试调用该 hook。默认值：False。
 
 **返回**
-HookRemoveHelper，可通过调用  ``hook_remove_helper.remove()``  来删除注册的 hook 函数。
+HookRemoveHelper，可通过调用 ``hook_remove_helper.remove()`` 来删除注册的 hook 函数。
+
+.. note::
+   ``register_forward_hook`` 是 ``register_forward_post_hook`` 的别名，两者在使用和功能上完全等价。
 
 **代码示例**
 
@@ -151,7 +163,7 @@ create_variable(name=None, persistable=None, dtype=None)
     - **dtype** (str|paddle.dtype|np.dtype，可选) - Layer 中参数数据类型。如果设置为 str，则可以是“bool”，“float16”，“float32”，“float64”，“int8”，“int16”，“int32”，“int64”，“uint8”或“uint16”。默认值为 "float32" 。
 
 **返回**
-Tensor，返回创建的  ``Tensor`` 
+Tensor，返回创建的 ``Tensor``
 
 **代码示例**
 
@@ -169,7 +181,7 @@ create_tensor(name=None, persistable=None, dtype=None)
     - **dtype** (str|paddle.dtype|np.dtype，可选) - Layer 中参数数据类型。如果设置为 str，则可以是“bool”，“float16”，“float32”，“float64”，“int8”，“int16”，“int32”，“int64”，“uint8”或“uint16”。默认值为 "float32" 。
 
 **返回**
-Tensor，返回创建的  ``Tensor`` 
+Tensor，返回创建的 ``Tensor``
 
 **代码示例**
 
@@ -289,15 +301,15 @@ register_buffer(name, tensor, persistable=True)
 
 将一个 Tensor 注册为 buffer。
 
-buffer 是一个不可训练的变量，不会被优化器更新，但在评估或预测阶段可能是必要的状态变量。比如  ``BatchNorm``  中的均值和方差。
+buffer 是一个不可训练的变量，不会被优化器更新，但在评估或预测阶段可能是必要的状态变量。比如 ``BatchNorm`` 中的均值和方差。
 
-注册的 buffer 默认是可持久性的，会被保存到  ``state_dict``  中。如果指定  ``persistable``  参数为 False，则会注册一个非持久性的 buffer，即不会同步和保存到  ``state_dict``  中。
+注册的 buffer 默认是可持久性的，会被保存到 ``state_dict`` 中。如果指定 ``persistable`` 参数为 False，则会注册一个非持久性的 buffer，即不会同步和保存到 ``state_dict`` 中。
 
 **参数**
 
     - **name** (str) - 注册 buffer 的名字。可以通过此名字来访问已注册的 buffer。
     - **tensor** (Tensor) - 将被注册为 buffer 的变量。
-    - **persistable** (bool，可选) - 注册的 buffer 是否需要可持久性地保存到  ``state_dict``  中。
+    - **persistable** (bool，可选) - 注册的 buffer 是否需要可持久性地保存到 ``state_dict`` 中。
 
 **返回**
 None
@@ -394,7 +406,7 @@ state_dict(destination=None, include_sublayers=True, structured_name_prefix='', 
 
 **参数**
 
-    - **destination** (dict，可选) - 如果提供  ``destination`` ，则所有参数和可持久性 buffers 都将存放在  ``destination``  中。默认值：None。
+    - **destination** (dict，可选) - 如果提供 ``destination``，则所有参数和可持久性 buffers 都将存放在 ``destination`` 中。默认值：None。
     - **include_sublayers** (bool，可选) - 如果设置为 True，则包括子层的参数和 buffers。默认值：True。
     - **structured_name_prefix** (str，可选) - 添加到参数和缓冲区名称的前缀。默认值：''。
     - **use_hook** (bool，可选) - 如果设置为 True，将_state_dict_hooks 中注册的函数应用于 destination。默认值：True。
@@ -407,15 +419,16 @@ dict，包含所有参数和可持久行 buffers 的 dict
 
 COPY-FROM: paddle.nn.Layer.state_dict
 
-set_state_dict(state_dict, use_structured_name=True)
+set_state_dict(state_dict, use_structured_name=True, assign=False)
 '''''''''
 
-根据传入的  ``state_dict``  设置参数和可持久性 buffers。所有参数和 buffers 将由  ``state_dict``  中的  ``Tensor``  设置。
+根据传入的 ``state_dict`` 设置参数和可持久性 buffers。所有参数和 buffers 将由 ``state_dict`` 中的 ``Tensor`` 设置。
 
 **参数**
 
     - **state_dict** (dict) - 包含所有参数和可持久性 buffers 的 dict。
     - **use_structured_name** (bool，可选) - 如果设置为 True，将使用 Layer 的结构性变量名作为 dict 的 key，否则将使用 Parameter 或者 Buffer 的变量名作为 key。默认值：True。
+    - **assign** (bool，可选) - 若为 False，则保留当前 Layer 中 Tensor 的属性；若为 True，则保留 ``state_dict`` 中 Tensor 的属性。默认值：False。
 
 **返回**
     - **missing_keys** (list) - 没有匹配到的参数名列表
@@ -426,16 +439,54 @@ set_state_dict(state_dict, use_structured_name=True)
 
 COPY-FROM: paddle.nn.Layer.set_state_dict
 
-to(device=None, dtype=None, blocking=None)
-'''''''''
+load_state_dict(state_dict, strict=True, assign=False)
+''''''''''
 
-根据给定的 device、dtype 和 blocking 转换 Layer 中的 parameters 和 buffers。
+将 ``state_dict`` 中的参数和 buffers 复制到当前 Layer 及其子层中。
+
+若 ``strict`` 为 True，则 ``state_dict`` 中的 key 必须与当前 Layer 的 ``state_dict()`` 返回结果完全一致。
 
 **参数**
 
-    - **device** （str|paddle.CPUPlace()|paddle.CUDAPlace()|paddle.CUDAPinnedPlace()|paddle.XPUPlace()|None，可选) - 希望存储 Layer 的设备位置。如果为 None，设备位置和原始的 Tensor 的设备位置一致。如果设备位置是 string 类型，取值可为  ``cpu`` ,  ``gpu:x``  and  ``xpu:x`` ，这里的  ``x``  是 GPUs 或者 XPUs 的编号。默认值：None。
-    - **dtype** (str|paddle.dtype|np.dtype，可选)- 数据的类型。如果为 None，数据类型和原始的 Tensor 一致。默认值：None。
-    - **blocking** （bool|None，可选）- 如果为 False 并且当前 Tensor 处于固定内存上，将会发生主机到设备端的异步拷贝。否则，会发生同步拷贝。如果为 None，blocking 会被设置为 True。默认为 False。
+    - **state_dict** (dict) - 包含参数和持久化 buffers 的 dict。
+    - **strict** (bool，可选) - 是否严格要求 ``state_dict`` 中的 key 与当前 Layer 的 ``state_dict()`` 返回结果完全一致。默认值：True。
+    - **assign** (bool，可选) - 若为 False，则保留当前 Layer 中 Tensor 的属性；若为 True，则保留 ``state_dict`` 中 Tensor 的属性。对于 ``Parameter`` 的梯度相关属性，以当前 Layer 中的值为准。默认值：False。
+
+**返回**
+    - **missing_keys** (list) - 缺失的参数名列表。
+    - **unexpected_keys** (list) - 传入 ``state_dict`` 中未被当前 Layer 使用的参数名列表。
+
+to(device=None, dtype=None, blocking=True, \*, non_blocking=False)
+'''''''''
+
+移动和/或转换 parameters 和 buffers。
+
+本 API 支持三种调用方式：
+
+1. ``to(device=None, dtype=None, blocking=True, *, non_blocking=False)``：
+    移动和/或转换 parameters 和 buffers。
+
+2. ``to(dtype, blocking=True, *, non_blocking=False)``：
+    等价于 ``self.to(device=None, dtype=dtype, ...)``。
+
+3. ``to(tensor, blocking=True, *, non_blocking=False)``：
+    等价于 ``self.to(device=tensor.place, dtype=tensor.dtype, ...)``。
+
+.. note::
+    此方法为就地（in-place）操作。
+
+**参数**
+
+    - **device** （str|paddle.CPUPlace()|paddle.CUDAPlace()|paddle.CUDAPinnedPlace()|paddle.XPUPlace()|None，可选) - 希望存储 Layer 的设备位置。如果为 None，设备位置和原始的 Tensor 的设备位置一致。如果设备位置是 string 类型，取值可为 ``cpu``, ``gpu:x`` 和 ``xpu:x``，这里的 ``x`` 是 GPUs 或者 XPUs 的编号。默认值：None。
+    - **dtype** (str|paddle.dtype|np.dtype|None，可选) - 数据的类型。如果为 None，数据类型和原始的 Tensor 一致。默认值：None。
+    - **blocking** （bool，可选）- 如果为 False 并且当前 Tensor 处于固定内存上，将会发生主机到设备端的异步拷贝。否则，会发生同步拷贝。默认值为 True。
+
+**关键字参数**
+
+    - **non_blocking** (bool，可选) - 如果为 True 并且当前 Tensor 处于固定内存上，将会发生主机到设备端的异步拷贝。默认值为 False。``non_blocking`` 和 ``blocking`` 互斥，不能同时设置。
+
+**返回**
+self
 
 **代码示例**
 
@@ -443,7 +494,7 @@ COPY-FROM: paddle.nn.Layer.to
 
 astype(dtype=None)
 '''''''''
-将 Layer 的所有  ``parameters``  和  ``buffers``  的数据类型转换为  ``dtype`` ，并返回这个 Layer。
+将 Layer 的所有 ``parameters`` 和 ``buffers`` 的数据类型转换为 ``dtype``，并返回这个 Layer。
 
 **参数**
 
@@ -460,11 +511,11 @@ COPY-FROM: paddle.nn.Layer.astype
 float(excluded_layers=None)
 '''''''''
 
-将所有浮点型的参数和通过  ``register_buffers()``  注册的 Buffer 变量转换为 float 数据类型。
+将所有浮点型的参数和通过 ``register_buffers()`` 注册的 Buffer 变量转换为 float 数据类型。
 
 **参数**
 
-    - **excluded_layers** （list|tuple|nn.Layer|None，可选） - 不需要转换数据类型的层。如果  ``excluded_layers``  为 None，则转换所有浮点参数和缓冲区，默认值：None。
+    - **excluded_layers** （list|tuple|nn.Layer|None，可选） - 不需要转换数据类型的层。如果 ``excluded_layers`` 为 None，则转换所有浮点参数和缓冲区，默认值：None。
 
 **代码示例**
 
@@ -473,14 +524,14 @@ COPY-FROM: paddle.nn.Layer.float
 float16(excluded_layers=None)
 '''''''''
 
-将所有浮点型的参数和通过  ``register_buffers()``  注册的 Buffer 变量转换为 float16 数据类型。
+将所有浮点型的参数和通过 ``register_buffers()`` 注册的 Buffer 变量转换为 float16 数据类型。
 
 .. note::
    nn.BatchNorm 不支持 float16 类型的权重，默认不对其权重进行类型转换。
 
 **参数**
 
-    - **excluded_layers** （list|tuple|nn.Layer|None，可选） - 不需要转换数据类型的层。如果  ``excluded_layers``  为 None，则转换除  ``nn.BatchNorm``  之外的所有浮点参数和缓冲区，默认值：None。
+    - **excluded_layers** （list|tuple|nn.Layer|None，可选） - 不需要转换数据类型的层。如果 ``excluded_layers`` 为 None，则转换除 ``nn.BatchNorm`` 之外的所有浮点参数和缓冲区，默认值：None。
 
 **代码示例**
 
@@ -489,14 +540,14 @@ COPY-FROM: paddle.nn.Layer.float16
 bfloat16(excluded_layers=None)
 '''''''''
 
-将所有浮点型的参数和通过  ``register_buffers()``  注册的 Buffer 变量转换为 bfloat16 数据类型。
+将所有浮点型的参数和通过 ``register_buffers()`` 注册的 Buffer 变量转换为 bfloat16 数据类型。
 
 .. note::
    nn.BatchNorm 不支持 bfloat16 类型的权重，默认不对其权重进行类型转换。
 
 **参数**
 
-    - **excluded_layers** （list|tuple|nn.Layer|None，可选） - 不需要转换数据类型的层。如果  ``excluded_layers``  为 None，则转换除  ``nn.BatchNorm``  之外的所有浮点参数和缓冲区，默认值：None。
+    - **excluded_layers** （list|tuple|nn.Layer|None，可选） - 不需要转换数据类型的层。如果 ``excluded_layers`` 为 None，则转换除 ``nn.BatchNorm`` 之外的所有浮点参数和缓冲区，默认值：None。
 
 **代码示例**
 

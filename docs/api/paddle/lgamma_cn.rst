@@ -5,13 +5,8 @@ lgamma
 
 .. py:function:: paddle.lgamma(x, name=None)
 
-
-
-
 计算输入 x 的 gamma 函数的自然对数并返回。
 
-.. math::
-    out = log\Gamma(x)
 
 参数
 :::::::::
@@ -20,7 +15,7 @@ lgamma
 
 返回
 :::::::::
-输出 Tensor，与  ``x``  维度相同、数据类型相同。
+输出 Tensor，与 ``x`` 维度相同、数据类型相同。
 
 代码示例
 :::::::::

@@ -29,7 +29,7 @@ COPY-FROM: paddle.optimizer.Optimizer
 
 方法
 ::::::::::::
-step()
+step(closure=None)
 '''''''''
 
 .. note::
@@ -38,9 +38,13 @@ step()
 
     执行一次优化器并进行参数更新。
 
+**参数**
+
+    - **closure** (Callable[[], Tensor], 可选) - 用于评估模型并返回损失的闭包函数。闭包函数应接受 0 个参数并返回 Tensor。适用于需要多次评估损失的优化过程。默认值为 None。
+
 **返回**
 
-无。
+Tensor 或 None。若传入 closure 参数则返回其输出的损失，否则返回 None。
 
 
 **代码示例**
@@ -61,7 +65,7 @@ minimize(loss, startup_program=None, parameters=None, no_grad_set=None)
 
 **返回**
 
- tuple(optimize_ops, params_grads)，其中 optimize_ops 为参数优化 OP 列表；param_grads 为由(param, param_grad)组成的列表，其中 param 和 param_grad 分别为参数和参数的梯度。在静态图模式下，该返回值可以加入到  ``Executor.run()``  接口的  ``fetch_list``  参数中，若加入，则会重写  ``use_prune``  参数为 True，并根据  ``feed``  和  ``fetch_list``  进行剪枝，详见  ``Executor``  的文档。
+ tuple(optimize_ops, params_grads)，其中 optimize_ops 为参数优化 OP 列表；param_grads 为由(param, param_grad)组成的列表，其中 param 和 param_grad 分别为参数和参数的梯度。在静态图模式下，该返回值可以加入到 ``Executor.run()`` 接口的 ``fetch_list`` 参数中，若加入，则会重写 ``use_prune`` 参数为 True，并根据 ``feed`` 和 ``fetch_list`` 进行剪枝，详见 ``Executor`` 的文档。
 
 
 **代码示例**
@@ -89,7 +93,7 @@ set_lr(value)
 
     该 API 只在 `Dygraph <../../user_guides/howto/dygraph/DyGraph.html>`_ 模式下生效。
 
-    手动设置当前  ``optimizer``  的学习率。当使用_LRScheduler 时，无法使用该 API 手动设置学习率，因为这将导致冲突。
+    手动设置当前 ``optimizer`` 的学习率。当使用_LRScheduler 时，无法使用该 API 手动设置学习率，因为这将导致冲突。
 
 **参数**
 
@@ -110,7 +114,7 @@ set_lr_scheduler(scheduler)
 
     该 API 只在 `Dygraph <../../user_guides/howto/dygraph/DyGraph.html>`_ 模式下生效。
 
-    手动设置当前  ``optimizer``  的学习率为 LRScheduler 类。
+    手动设置当前 ``optimizer`` 的学习率为 LRScheduler 类。
 
 **参数**
 
@@ -123,6 +127,53 @@ set_lr_scheduler(scheduler)
 **代码示例**
 
 COPY-FROM: paddle.optimizer.Optimizer.set_lr_scheduler
+
+state_dict()
+'''''''''
+
+获取优化器的状态字典信息。包含优化器使用的所有 Tensor。对于 Adam 优化器，包含 beta1、beta2、momentum 等。如果使用了 LRScheduler，状态字典中还会包含 global_step。如果优化器从未被调用过（minimize 函数），则状态字典为空。
+
+**返回**
+
+dict[str, Tensor]，包含优化器使用的所有 Tensor 的字典。
+
+**代码示例**
+
+COPY-FROM: paddle.optimizer.Optimizer.state_dict
+
+set_state_dict(state_dict)
+'''''''''
+
+加载优化器的状态字典。对于 Adam 优化器，包含 beta1、beta2、momentum 等。如果使用了 LRScheduler，global_step 也将被更新。
+
+**参数**
+
+    - **state_dict** (dict) - 包含优化器所需的所有 Tensor 的字典。
+
+**返回**
+
+无。
+
+**代码示例**
+
+COPY-FROM: paddle.optimizer.Optimizer.set_state_dict
+
+load_state_dict(state_dict)
+'''''''''
+
+加载优化器的状态字典。对于 Adam 优化器，包含 beta1、beta2、momentum 等。如果使用了 LRScheduler，global_step 也将被更新。
+
+**参数**
+
+    - **state_dict** (dict) - 包含优化器所需的所有 Tensor 的字典。
+
+**返回**
+
+无。
+
+**代码示例**
+
+COPY-FROM: paddle.optimizer.Optimizer.load_state_dict
 
 get_lr()
 '''''''''

@@ -34,7 +34,7 @@ RAdam
 参数
 ::::::::::::
 
-  - **learning_rate** (float|LRScheduler，可选) - 学习率，用于参数更新的计算。可以是一个浮点型值或者一个 `LRScheduler` 类。默认值为 0.001。
+  - **learning_rate** (float|LRScheduler，可选) - 学习率，用于参数更新的计算。可以是一个浮点型值或者一个 ``LRScheduler`` 类。默认值为 0.001。
   - **parameters** (list，可选) - 指定优化器需要优化的参数。在动态图模式下必须提供该参数；在静态图模式下默认值为 None，这时所有的参数都将被优化。
   - **beta1** (float，可选) - 一阶矩估计的指数衰减率，默认值为 0.9。
   - **beta2** (float，可选) - 二阶矩估计的指数衰减率，默认值为 0.999。
@@ -45,7 +45,7 @@ RAdam
 
 .. note::
 
-    目前  ``RAdam``  不支持 Sparse Parameter Optimization（稀疏参数优化）。
+    目前 ``RAdam`` 不支持 Sparse Parameter Optimization（稀疏参数优化）。
 
 代码示例
 ::::::::::::
@@ -87,7 +87,7 @@ minimize(loss, startup_program=None, parameters=None, no_grad_set=None)
 
 **返回**
 
- tuple(optimize_ops, params_grads)，其中 optimize_ops 为参数优化 OP 列表；param_grads 为由(param, param_grad)组成的列表，其中 param 和 param_grad 分别为参数和参数的梯度。在静态图模式下，该返回值可以加入到  ``Executor.run()``  接口的  ``fetch_list``  参数中，若加入，则会重写  ``use_prune``  参数为 True，并根据  ``feed``  和  ``fetch_list``  进行剪枝，详见  ``Executor``  的文档。
+ tuple(optimize_ops, params_grads)，其中 optimize_ops 为参数优化 OP 列表；param_grads 为由(param, param_grad)组成的列表，其中 param 和 param_grad 分别为参数和参数的梯度。在静态图模式下，该返回值可以加入到 ``Executor.run()`` 接口的 ``fetch_list`` 参数中，若加入，则会重写 ``use_prune`` 参数为 True，并根据 ``feed`` 和 ``fetch_list`` 进行剪枝，详见 ``Executor`` 的文档。
 
 **代码示例**
 
@@ -115,7 +115,7 @@ set_lr(value)
 
     该 API 只在 `Dygraph <../../user_guides/howto/dygraph/DyGraph.html>`_ 模式下生效。
 
-    手动设置当前  ``optimizer``  的学习率。当使用_LRScheduler 时，无法使用该 API 手动设置学习率，因为这将导致冲突。
+    手动设置当前 ``optimizer`` 的学习率。当使用_LRScheduler 时，无法使用该 API 手动设置学习率，因为这将导致冲突。
 
 **参数**
 
@@ -136,7 +136,7 @@ set_lr_scheduler(scheduler)
 
     该 API 只在 `Dygraph <../../user_guides/howto/dygraph/DyGraph.html>`_ 模式下生效。
 
-    手动设置当前  ``optimizer``  的学习率为 LRScheduler 类。
+    手动设置当前 ``optimizer`` 的学习率为 LRScheduler 类。
 
 **参数**
 

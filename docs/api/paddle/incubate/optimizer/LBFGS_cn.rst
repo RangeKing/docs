@@ -5,7 +5,7 @@ LBFGS
 
 .. py:class:: paddle.incubate.optimizer.LBFGS(lr=1.0, max_iter=20, max_eval=None, tolerance_grad=1e-07, tolerance_change=1e-09, history_size=100, line_search_fn=None, parameters=None, weight_decay=None, grad_clip=None, name=None)
 
- ``LBFGS``  使用 L-BFGS 方法对参数进行优化更新，使得 loss 值最小。
+``LBFGS`` 使用 L-BFGS 方法对参数进行优化更新，使得 loss 值最小。
 
 L-BFGS 是限制内存的 BFGS 方法，适用于海森矩阵为稠密矩阵、内存开销较大场景。BFGS 参考 :ref:`cn_api_paddle_incubate_optimizer_functional_minimize_bfgs` .
 
@@ -15,7 +15,7 @@ LBFGS 具体原理参考书籍 Jorge Nocedal, Stephen J. Wright, Numerical Optim
 使用方法
 :::::::::
 - LBFGS 优化器此实现为类形式，与 Paddle 现有 SGD、Adam 优化器相似。
-  通过调用 backward()计算梯度，并使用 step(closure)更新网络参数，其中 closure 为需要优化的闭包函数。
+  通过调用 backward() 计算梯度，并使用 step(closure) 更新网络参数，其中 closure 为需要优化的闭包函数。
 
 
 .. warning::

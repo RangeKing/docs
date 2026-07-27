@@ -6,7 +6,7 @@ Imdb
 .. py:class:: paddle.text.Imdb(data_file=None, mode='train', cutoff=150, download=True)
 
 
-该类是对 `IMDB <https://www.imdb.com/interfaces/>`_ 测试数据集的实现。
+该类是对 `IMDB <https://datasets.imdbws.com/>`_ 测试数据集的实现。
 
 参数
 :::::::::
@@ -17,7 +17,7 @@ Imdb
 
 返回
 :::::::::
- ``Dataset`` ， IMDB 数据集实例。
+``Dataset``， IMDB 数据集实例。
 
 代码示例
 :::::::::

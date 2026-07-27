@@ -6,12 +6,12 @@ You will learn how to develop programs in local environment under the guidelines
 - Please refer to the coding comment format of [Doxygen](http://www.doxygen.nl/)
 - Unit test is needed for all codes.
 - Pass through all unit tests.
-- Please follow [regulations of submitting codes](./code_review_cn.html).
+- Please follow [regulations of submitting codes](./code_review_en.html).
 
 The following guidiance tells you how to submit code.
 ## [Fork](https://help.github.com/articles/fork-a-repo/)
 
-Transfer to the home page of GitHub [PaddlePaddle](https://github.com/PaddlePaddle/Paddle) ,and then click button `Fork`  to generate the git under your own file directory,such as <https://github.com/USERNAME/Paddle>。
+Transfer to the home page of GitHub [PaddlePaddle](https://github.com/PaddlePaddle/Paddle) ,and then click button `Fork`  to generate the git under your own file directory,such as `https://github.com/USERNAME/Paddle`.
 
 ## Clone
 
@@ -77,7 +77,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ## Build
 
-Please refer to [Compile From Source Code](../../../install/compile/fromsource_en.html) about more information of building PaddlePaddle source codes.
+Please refer to [Compile From Source Code](../../install/compile/fromsource_en.html) about more information of building PaddlePaddle source codes.
 
 ## Test
 
@@ -121,7 +121,7 @@ Check for merge conflicts................................................Passed
 Check for broken symlinks................................................Passed
 Detect Private Key...................................(no files to check)Skipped
 Fix End of Files.....................................(no files to check)Skipped
-clang-formater.......................................(no files to check)Skipped
+clang-formatter.......................................(no files to check)Skipped
 [my-cool-stuff c703c041] add test file
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 233
@@ -160,7 +160,7 @@ Get the latest code of upstream and update current branch.
 
 ## Push to remote repository
 
-Push local modification to GitHub(https://github.com/USERNAME/Paddle).
+Push local modification to GitHub (`https://github.com/USERNAME/Paddle`).
 
 ```bash
 # submit it to remote git the branch my-cool-stuff of origin

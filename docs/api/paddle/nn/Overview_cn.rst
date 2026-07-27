@@ -45,13 +45,12 @@ paddle.nn 目录下包含飞桨框架支持的神经网络层和相关函数的�
 .. csv-table::
     :header: "API 名称", "API 功能"
 
-
-    " :ref:`paddle.nn.Layer <cn_api_paddle_nn_Layer>` ", "基于 OOD 实现的动态图 Layer"
-    " :ref:`paddle.nn.LayerList <cn_api_paddle_nn_LayerList>` ", "用于保存子层列表"
+    " :ref:`paddle.nn.Module <cn_api_paddle_nn_Module>` ", "基于 OOD 实现的动态图 Layer"
+    " :ref:`paddle.nn.ModuleList <cn_api_paddle_nn_ModuleList>` ", "用于保存子层列表"
     " :ref:`paddle.nn.ParameterList <cn_api_paddle_nn_ParameterList>` ", "参数列表容器"
     " :ref:`paddle.nn.ParameterDict <cn_api_paddle_nn_ParameterDict>` ", "参数字典容器"
     " :ref:`paddle.nn.Sequential <cn_api_paddle_nn_Sequential>` ", "顺序容器；子 Layer 将按构造函数参数的顺序添加到此容器中"
-    " :ref:`paddle.nn.LayerDict <cn_api_paddle_nn_LayerDict>` ", "保存子层到有序字典中，它包含的子层将被正确地注册和添加"
+    " :ref:`paddle.nn.ModuleDict <cn_api_paddle_nn_ModuleDict>` ", "保存子层到有序字典中，它包含的子层将被正确地注册和添加"
 
 .. _convolution_layers:
 
@@ -205,6 +204,8 @@ Transformer 相关
 
 
     " :ref:`paddle.nn.MultiHeadAttention <cn_api_paddle_nn_MultiHeadAttention>` ", "多头注意力机制"
+    " :ref:`paddle.nn.attention.flex_attention.or_masks <cn_api_paddle_nn_attention_flex_attention_or_masks>` ", "组合多个 mask 函数并返回逻辑或结果"
+    " :ref:`paddle.nn.attention.flex_attention.and_masks <cn_api_paddle_nn_attention_flex_attention_and_masks>` ", "组合多个 mask 函数并返回逻辑与结果"
     " :ref:`paddle.nn.functional.scaled_dot_product_attention <cn_api_paddle_nn_functional_scaled_dot_product_attention>` ", "点乘注意力机制，并在此基础上加入了对注意力权重的缩放"
     " :ref:`paddle.nn.functional.sparse_attention <cn_api_paddle_nn_functional_sparse_attention>` ", "稀疏版本的 Attention API，对 Transformer 模块中的 Attention 矩阵进行了稀疏化，从而减少内存消耗和计算量"
     " :ref:`paddle.nn.Transformer <cn_api_paddle_nn_Transformer>` ", "Transformer 模型"
@@ -413,6 +414,7 @@ Padding 相关函数
     " :ref:`paddle.nn.functional.leaky_relu <cn_api_paddle_nn_functional_leaky_relu>` ", "leaky_relu 激活函数"
     " :ref:`paddle.nn.functional.leaky_relu_ <cn_api_paddle_nn_functional_leaky_relu_>` ", "Inplace 版本的 :ref:`cn_api_paddle_nn_functional_leaky_relu` API，对输入 x 采用 Inplace 策略"
     " :ref:`paddle.nn.functional.log_sigmoid <cn_api_paddle_nn_functional_log_sigmoid>` ", "log_sigmoid 激活函数"
+    " :ref:`paddle.nn.functional.logsigmoid <cn_api_paddle_nn_functional_logsigmoid>` ", "log_sigmoid 激活函数"
     " :ref:`paddle.nn.functional.log_softmax <cn_api_paddle_nn_functional_log_softmax>` ", "log_softmax 激活函数"
     " :ref:`paddle.nn.functional.maxout <cn_api_paddle_nn_functional_maxout>` ", "maxout 激活函数"
     " :ref:`paddle.nn.functional.prelu <cn_api_paddle_nn_functional_prelu>` ", "prelu 激活函数"
@@ -517,12 +519,12 @@ Embedding 相关函数
     " :ref:`paddle.nn.functional.sigmoid_focal_loss <cn_api_paddle_nn_functional_sigmoid_focal_loss>` ", "用于计算分类任务中前景类-背景类数量不均衡问题的损失"
     " :ref:`paddle.nn.functional.smooth_l1_loss <cn_api_paddle_nn_functional_smooth_l1_loss>` ", "用于计算平滑 L1 损失"
     " :ref:`paddle.nn.functional.softmax_with_cross_entropy <cn_api_paddle_nn_functional_softmax_with_cross_entropy>` ", "将 softmax 操作、交叉熵损失函数的计算过程进行合并"
-    " :ref:`paddle.nn.functional.margin_cross_entropy <cn_api_paddle_nn_functional_margin_cross_entropy>` ", "支持  ``Arcface`` ， ``Cosface`` ， ``Sphereface``  的结合 Margin 损失函数"
+    " :ref:`paddle.nn.functional.margin_cross_entropy <cn_api_paddle_nn_functional_margin_cross_entropy>` ", "支持 ``Arcface``，``Cosface``，``Sphereface`` 的结合 Margin 损失函数"
     " :ref:`paddle.nn.functional.soft_margin_loss <cn_api_paddle_nn_functional_soft_margin_loss>` ", "用于计算 soft margin loss 损失函数"
     " :ref:`paddle.nn.functional.triplet_margin_loss <cn_api_paddle_nn_functional_triplet_margin_loss>` ", "用于计算 TripletMarginLoss"
     " :ref:`paddle.nn.functional.triplet_margin_with_distance_loss <cn_api_paddle_nn_functional_triplet_margin_with_distance_loss>` ", "用户自定义距离函数用于计算 triplet margin loss 损失"
     " :ref:`paddle.nn.functional.multi_label_soft_margin_loss <cn_api_paddle_nn_functional_multi_label_soft_margin_loss>` ", "用于计算多分类的 hinge loss 损失函数"
-    " :ref:`paddle.nn.functional.hinge_embedding_loss <cn_api_paddle_nn_functional_hinge_embedding_loss>` ", "计算输入 input 和标签 label（包含 1 和 -1） 间的 `hinge embedding loss` 损失"
+    " :ref:`paddle.nn.functional.hinge_embedding_loss <cn_api_paddle_nn_functional_hinge_embedding_loss>` ", "计算输入 input 和标签 label（包含 1 和 -1） 间的 ``hinge embedding loss`` 损失"
     " :ref:`paddle.nn.functional.rnnt_loss <cn_api_paddle_nn_functional_rnnt_loss>` ", "计算 RNNT loss，也可以叫做 softmax with RNNT"
     " :ref:`paddle.nn.functional.multi_margin_loss <cn_api_paddle_nn_functional_multi_margin_loss>` ", "用于计算 multi margin loss 损失函数"
     " :ref:`paddle.nn.functional.multi_label_margin_loss <cn_api_paddle_nn_functional_multi_label_margin_loss>` ", "用于计算 multi label margin loss 损失函数"

@@ -17,7 +17,7 @@ IpuCompiledProgram 将输入的 Program 转换和优化成 IPU 所需要的形�
 
 返回
 :::::::::
-IpuCompiledProgram，初始化后的  ``IpuCompiledProgram``  对象。
+IpuCompiledProgram，初始化后的 ``IpuCompiledProgram`` 对象。
 
 代码示例
 ::::::::::
@@ -29,7 +29,7 @@ COPY-FROM: paddle.static.IpuCompiledProgram
 compile(self, feed_list, fetch_list)
 '''''''''
 
-将 Program 进行编译，以便在 ipu 上运行。用户可以通过 `feed_list` 、`fetch_list` 传入计算图输入和输出的名字。
+将 Program 进行编译，以便在 ipu 上运行。用户可以通过 ``feed_list`` 、``fetch_list`` 传入计算图输入和输出的名字。
 
 **参数**
 
@@ -38,7 +38,7 @@ compile(self, feed_list, fetch_list)
 
 **返回**
 
-Program，编译之后的  ``Program``  对象。
+Program，编译之后的 ``Program`` 对象。
 
 
 **代码示例**

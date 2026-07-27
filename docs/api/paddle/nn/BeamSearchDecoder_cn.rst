@@ -27,7 +27,7 @@ BeamSearchDecoder
 
 返回
 ::::::::::::
-BeamSearchDecoder 的一个实例，可以用于传入 `paddle.nn.dynamic\_decode` 以实现解码过程。
+BeamSearchDecoder 的一个实例，可以用于传入 ``paddle.nn.dynamic\_decode`` 以实现解码过程。
 
 代码示例
 ::::::::::::
@@ -44,7 +44,7 @@ tile_beam_merge_with_batch(x, beam_size)
 
 **参数**
 
-  - **x** (Variable) - 形状为 :math:`[batch\_size, ...]` 的 tenosr。数据类型应为 float32，float64，int32，int64 或 bool。
+  - **x** (Variable) - 形状为 :math:`[batch\_size, ...]` 的 tensor。数据类型应为 float32，float64，int32，int64 或 bool。
   - **beam_size** (int) - 在 beam search 中使用的 beam 宽度。
 
 **返回**
@@ -59,7 +59,7 @@ _split_batch_beams(x)
 
 **参数**
 
-  - **x** (Variable) - 形状为 :math:`[batch\_size * beam\_size, ...]` 的 tenosr。数据类型应为 float32，float64，int32，int64 或 bool。
+  - **x** (Variable) - 形状为 :math:`[batch\_size * beam\_size, ...]` 的 tensor。数据类型应为 float32，float64，int32，int64 或 bool。
 
 **返回**
 
@@ -72,7 +72,7 @@ _merge_batch_beams(x)
 
 **参数**
 
-  - **x** (Variable) - 形状为 :math:`[batch\_size, beam_size,...]` 的 Tenosr。数据类型应为 float32，float64，int32，int64 或 bool。
+  - **x** (Variable) - 形状为 :math:`[batch\_size, beam_size,...]` 的 Tensor。数据类型应为 float32，float64，int32，int64 或 bool。
 
 **返回**
 
@@ -85,7 +85,7 @@ _expand_to_beam_size(x)
 
 **参数**
 
-  - **x** (Variable) - 形状为 :math:`[batch\_size, ...]` 的 tenosr。数据类型应为 float32，float64，int32，int64 或 bool。
+  - **x** (Variable) - 形状为 :math:`[batch\_size, ...]` 的 tensor。数据类型应为 float32，float64，int32，int64 或 bool。
 
 **返回**
 

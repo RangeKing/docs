@@ -6,7 +6,7 @@ UCIHousing
 .. py:class:: paddle.text.UCIHousing(data_file = None, mode = 'train', download = True)
 
 
-该类是对 `UCI housing <https://archive.ics.uci.edu/ml/datasets/Housing>`_
+该类是对 `UCI housing <https://github.com/rupakc/UCI-Data-Analysis/blob/master/Boston%20Housing%20Dataset/Boston%20Housing/UCI%20Machine%20Learning%20Repository_%20Housing%20Data%20Set.pdf>`_
 测试数据集的实现。
 
 参数
@@ -18,7 +18,7 @@ UCIHousing
 
 返回值
 :::::::::
- ``Dataset`` ，UCI housing 数据集实例。
+``Dataset``，UCI housing 数据集实例。
 
 代码示例
 :::::::::

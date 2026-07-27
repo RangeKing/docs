@@ -64,7 +64,7 @@
 
 部分参数裁剪需要设置参数的 :ref:`paddle.ParamAttr <cn_api_paddle_ParamAttr>` ，其中的 ``need_clip`` 默认为 True，表示需要裁剪，如果设置为 False，则不会裁剪。
 
-例如：仅裁剪 `linear` 中 `weight` 的梯度，则需要在创建 `linear` 层时设置 `bias_attr` 如下：
+例如：仅裁剪 ``linear`` 中 ``weight`` 的梯度，则需要在创建 ``linear`` 层时设置 ``bias_attr`` 如下：
 
 .. code:: ipython3
 
@@ -113,7 +113,7 @@
 
 部分参数裁剪的设置方式与上面一致，也是通过设置参数的 :ref:`paddle.ParamAttr <cn_api_paddle_ParamAttr>` ，其中的 ``need_clip`` 默认为 True，表示需要裁剪，如果设置为 False，则不会裁剪。
 
-例如：仅裁剪 `linear` 中 `bias` 的梯度，则需要在创建 `linear` 层时设置 `weight_attr` 如下：
+例如：仅裁剪 ``linear`` 中 ``bias`` 的梯度，则需要在创建 ``linear`` 层时设置 ``weight_attr`` 如下：
 
 .. code:: ipython3
 
@@ -156,7 +156,7 @@
 .. code:: ipython3
 
     linear = paddle.nn.Linear(10, 10)
-    clip = paddle.nn.ClipGradByGloabalNorm(clip_norm=1.0)
+    clip = paddle.nn.ClipGradByGlobalNorm(clip_norm=1.0)
     sdg = paddle.optimizer.SGD(learning_rate=0.1, parameters=linear.parameters(), grad_clip=clip)
 
 如果仅需裁剪部分参数，用法如下：

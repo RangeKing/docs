@@ -3,9 +3,9 @@
 hardswish
 -------------------------------
 
-.. py:function:: paddle.nn.functional.hardswish(x, name=None)
+.. py:function:: paddle.nn.functional.hardswish(x, inplace=False, name=None)
 
-hardswish 激活函数。在 MobileNetV3 架构中被提出，相较于 swish 函数，具有数值稳定性好，计算速度快等优点，具体原理请参考：https://arxiv.org/pdf/1905.02244.pdf
+hardswish 激活函数。在 MobileNetV3 架构中被提出，相较于 swish 函数，具有数值稳定性好，计算速度快等优点，具体原理请参考：`Searching for MobileNetV3 <https://arxiv.org/pdf/1905.02244.pdf>`_ 。
 
 .. math::
 
@@ -22,12 +22,13 @@ hardswish 激活函数。在 MobileNetV3 架构中被提出，相较于 swish �
 
 参数
 ::::::::::
-    - **x** (Tensor) - 输入的  ``Tensor`` ，数据类型为：float32、float64。
+    - **x** (Tensor) - 输入的 ``Tensor``，数据类型为：float32、float64。别名 ``input``。
+    - **inplace** (bool，可选) - 是否使用 inplace 操作。默认值为 False。
     - **name** (str，可选) - 具体用法请参见 :ref:`api_guide_Name`，一般无需设置，默认值为 None。
 
 返回
 ::::::::::
-     ``Tensor`` ，数据类型和形状同  ``x``  一致。
+    ``Tensor``，数据类型和形状同 ``x`` 一致。
 
 代码示例
 ::::::::::

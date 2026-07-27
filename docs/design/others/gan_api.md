@@ -7,14 +7,14 @@ It applies several important concepts in machine learning system design, includi
 In our GAN design, we wrap it as a user-friendly easily customized python API to design different models. We take the conditional DC-GAN (Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks [https://arxiv.org/abs/1511.06434]) as an example due to its good performance on image generation.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/PaddlePaddle/Paddle/develop/doc/fluid/images/test.dot.png" width = "35%" align="center"/><br/>
+<img src="https://raw.githubusercontent.com/PaddlePaddle/docs/refs/heads/develop/docs/design/others/test.dot.png" width = "35%" align="center"/><br/>
 Figure 1. The overall running logic of GAN. The black solid arrows indicate the forward pass; the green dashed arrows indicate the backward pass of generator training; the red dashed arrows indicate the backward pass of the discriminator training. The BP pass of the green (red) arrow should only update the parameters in the green (red) boxes. The diamonds indicate the data providers. d\_loss and g\_loss marked in red and green are the two targets we would like to run.
 </p>
 
 The operators, layers and functions required/optional to build a GAN demo is summarized in https://github.com/PaddlePaddle/Paddle/issues/4563.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/PaddlePaddle/Paddle/develop/doc/fluid/images/dcgan.png" width = "90%" align="center"/><br/>
+<img src="https://raw.githubusercontent.com/PaddlePaddle/docs/refs/heads/develop/docs/design/others/dcgan.png" width = "90%" align="center"/><br/>
 Figure 2. Photo borrowed from the original DC-GAN paper.
 </p>
 
@@ -42,7 +42,7 @@ build the whole GAN model, define training loss for both generator and discrimat
 To be more detailed, we introduce our design of DCGAN as following:
 
 ### Class member Function: Initializer
-- Set up hyper-parameters, including condtional dimension, noise dimension, batch size and so forth.
+- Set up hyper-parameters, including conditional dimension, noise dimension, batch size and so forth.
 - Declare and define all the model variables. All the discriminator parameters are included in the list self.theta_D and all the generator parameters are included in the list self.theta_G.
 ```python
 class DCGAN:
@@ -58,7 +58,7 @@ class DCGAN:
     self.D_b0 = pd.Variable(np.zeros(128)) # variable also support initialization using a  numpy data
     self.D_W1 = pd.Variable(shape=[784, 128], data=pd.gaussian_normal_randomizer())
     self.D_b1 = pd.Variable(np.zeros(128)) # variable also support initialization using a  numpy data
-    self.D_W2 = pd.Varialble(np.random.rand(128, 1))
+    self.D_W2 = pd.Variable(np.random.rand(128, 1))
     self.D_b2 = pd.Variable(np.zeros(128))
     self.theta_D = [self.D_W0, self.D_b0, self.D_W1, self.D_b1, self.D_W2, self.D_b2]
 
@@ -67,7 +67,7 @@ class DCGAN:
     self.G_b0 = pd.Variable(np.zeros(128)) # variable also support initialization using a  numpy data
     self.G_W1 = pd.Variable(shape=[784, 128], data=pd.gaussian_normal_randomizer())
     self.G_b1 = pd.Variable(np.zeros(128)) # variable also support initialization using a  numpy data
-    self.G_W2 = pd.Varialble(np.random.rand(128, 1))
+    self.G_W2 = pd.Variable(np.random.rand(128, 1))
     self.G_b2 = pd.Variable(np.zeros(128))
     self.theta_G = [self.G_W0, self.G_b0, self.G_W1, self.G_b1, self.G_W2, self.G_b2]
 ```
@@ -153,7 +153,7 @@ class DCGAN:
     self.d_loss_fake = pd.reduce_mean(pd.cross_entropy(self.D_f, np.zeros(self.batch_size))
     self.d_loss = self.d_loss_real + self.d_loss_fake
 
-    self.g_loss = pd.reduce_mean(pd.cross_entropy(self.D_f, np.ones(self.batch_szie))
+    self.g_loss = pd.reduce_mean(pd.cross_entropy(self.D_f, np.ones(self.batch_size))
 ```
 
 If we do not have dependency engine but blocks, the module building our GAN model will be like this:
@@ -175,7 +175,7 @@ class DCGAN:
       else: # original version of GAN
         self.G = self.generator(self.z)
         self.D_g = self.discriminator(self.G, self.y)
-      self.g_loss = pd.reduce_mean(pd.cross_entropy(self.D_g, np.ones(self.batch_szie))
+      self.g_loss = pd.reduce_mean(pd.cross_entropy(self.D_g, np.ones(self.batch_size))
 
     with pd.default_block().d_block():
       if self.y_dim: # if conditional GAN, includes label

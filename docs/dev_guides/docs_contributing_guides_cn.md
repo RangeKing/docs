@@ -15,7 +15,8 @@ PaddlePaddle 的文档存储于 [PaddlePaddle/docs](https://github.com/PaddlePad
 ## 一、修改前的准备工作
 
 ### 1.1 Fork
-先跳转到 [PaddlePaddle/docs](https://github.com/PaddlePaddle/docs) GitHub 首页，然后单击 Fork 按钮，生成自己仓库下的目录，比如你的 GitHub 用户名为 USERNAME，则生成： https://github.com/USERNAME/docs。
+先跳转到 [PaddlePaddle/docs](https://github.com/PaddlePaddle/docs) GitHub 首页，然后单击 Fork 按钮，生成自己仓库下的目录。例如你的 GitHub 用户名为 USERNAME，会生成如下仓库地址：
+`https://github.com/USERNAME/docs`
 
 ![fork repo](https://github.com/PaddlePaddle/docs/blob/develop/docs/dev_guides/images/docs-contributing-guides-fork-repo.png?raw=true)
 
@@ -46,7 +47,7 @@ Paddle 开发人员使用 [pre-commit](https://pre-commit.com/) 工具来管理 
 pre-commit 测试是 CI 流水线中测试的一部分，不满足钩子的 PR 不能被提交到 Paddle，首先安装并在当前目录运行它：
 
 ```
-➜  pip install pre-commit==2.17.0
+➜  pip install pre-commit
 ➜  pre-commit install
 ```
 
@@ -131,7 +132,7 @@ ruff-format..............................................................Passed
 
 ### 3.2 确保本地仓库是最新的
 
-在准备发起 Pull Request 之前，需要同步原仓库（https://github.com/PaddlePaddle/docs）最新的代码。
+在准备发起 Pull Request 之前，需要同步原仓库（[https://github.com/PaddlePaddle/docs](https://github.com/PaddlePaddle/docs)）最新的代码。
 
 首先通过 `git remote` 查看当前远程仓库的名字。
 
@@ -161,7 +162,7 @@ upstream
 
 ### 3.3 Push 到远程仓库
 
-将本地的修改推送到 GitHub 上，也就是 https://github.com/USERNAME/docs。
+将本地的修改推送到 GitHub 上，也就是 `https://github.com/USERNAME/docs`。
 
 ```
 # 推送到远程仓库 origin 的 my-cool-stuff 分支上
@@ -175,7 +176,7 @@ upstream
 
 ## 五、review & merge
 
-提交 PR 后，可以指定 Paddle 的同学进行 Review。目前 Paddle 负责文档的同学是 [@sunzhongkai588](https://github.com/sunzhongkai588)、[@Ligoml](https://github.com/Ligoml)、[@jzhang533](https://github.com/jzhang533) 等 。
+提交 PR 后，可以指定 Paddle 的同学进行 Review。目前 Paddle 负责文档的同学是 [@mattheliu](https://github.com/mattheliu)、[@sunzhongkai588](https://github.com/sunzhongkai588)、、[@jzhang533](https://github.com/jzhang533) 等。
 
 
 ## CI
@@ -187,4 +188,4 @@ Paddle 中与文档相关的 CI 流水线是 `Docs-NEW` 等，主要对以下几
 - 检查 API 示例代码是否能正常从英文文档 copy
 - 检查渲染后的文档是否存在 WARNING 或 ERROR
 
-如果无法通过该 CI，请点击对应 CI 的 details，查看 CI 运行的的 log，并根据 log 修改你的 PR，直至通过 CI。
+如果无法通过该 CI，请点击对应 CI 的标题，查看 CI 运行的的 log，并根据 log 修改你的 PR，直至通过 CI。

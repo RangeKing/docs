@@ -1,6 +1,6 @@
 # SLIM Quantization-aware training (QAT) for INT8 OneDNN
 
-This document is based on [QAT INT8 MKL-DNN in Paddle](https://github.com/PaddlePaddle/Paddle/tree/develop/python/paddle/fluid/contrib/slim/tests), that describes how to use [Paddle Slim](https://paddlepaddle.github.io/PaddleSlim/index.html) to convert a quantization-aware trained model (Quant model) into INT8 MKL-DNN quantized model and run it.
+This document is based on [QAT INT8 MKL-DNN in Paddle](https://github.com/PaddlePaddle/Paddle/tree/release/1.8/python/paddle/fluid/contrib/slim/tests), that describes how to use [Paddle Slim](https://github.com/PaddlePaddle/PaddleSlim/tree/develop/docs) to convert a quantization-aware trained model (Quant model) into INT8 MKL-DNN quantized model and run it.
 
 In **Release 1.5**, we have released the first approach to the MKL-DNN-based quantization of Quant models, called Quant1. It enabled the `conv2d` and `mul` INT8 MKL-DNN kernels for Quant trained models (GoogleNet, MobileNetV1, MobileNetV2, ResNet50, ResNet101, VGG16, and VGG19) with 0.05% accuracy diff.
 
@@ -62,7 +62,7 @@ Notes:
    ```... → input1 → conv2d → output1 → batch_norm → output2 → relu → output3 → ...```
    and we want to quantize the `conv2d` op, then after applying FP32 optimizations the sequence will become
    ```... → input1 → conv2d → output3 → ...```
-   and the quantization scales have to be collected for the `input1` and `outpu3` tensors in the Quant model.
+   and the quantization scales have to be collected for the `input1` and `output3` tensors in the Quant model.
 2. Quantization of the following operators is supported: `conv2d`, `depthwise_conv2d`, `mul`, `fc`, `matmul`, `pool2d`, `reshape2`, `transpose2`, `concat`.
 3. The longest sequence of consecutive quantizable operators in the model, the biggest performance boost can be achieved through quantization:
    ```... → conv2d → conv2d → pool2d → conv2d → conv2d → ...```

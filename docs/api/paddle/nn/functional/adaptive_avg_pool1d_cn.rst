@@ -5,10 +5,10 @@ adaptive_avg_pool1d
 
 .. py:function:: paddle.nn.functional.adaptive_avg_pool1d(x, output_size, name=None)
 
-根据  ``output_size``  对 Tensor  ``x``  计算 1D 自适应平均池化。
+根据 ``output_size`` 对 Tensor ``x`` 计算 1D 自适应平均池化。
 
 .. note::
-   详细请参考对应的 `Class` 请参考：:ref:`cn_api_paddle_nn_AdaptiveAvgPool1D`。
+   详细请参考对应的 ``Class`` 请参考：:ref:`cn_api_paddle_nn_AdaptiveAvgPool1D`。
 
 
 参数

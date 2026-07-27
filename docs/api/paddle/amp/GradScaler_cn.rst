@@ -7,7 +7,7 @@ GradScaler
 
 
 
-GradScaler 用于动态图模式下的"自动混合精度"的训练。它控制 loss 的缩放比例，有助于避免浮点数溢出的问题。这个类具有 ``scale()``、 ``unscale_()``、 ``step()``、 ``update()``、 ``minimize()`` 和参数的 ``get()/set()`` 等方法。
+GradScaler 用于动态图模式下的"自动混合精度"的训练。它控制 loss 的缩放比例，有助于避免浮点数溢出的问题。这个类具有 ``scale()``、 ``unscale_()``、 ``minimize()``、 ``step()``、 ``update()`` 和参数的 ``get()/set()`` 共十九个方法。
 
 ``scale()`` 用于让 loss 乘上一个缩放的比例。
 ``unscale_()`` 用于让 loss 除去一个缩放的比例。
@@ -15,16 +15,23 @@ GradScaler 用于动态图模式下的"自动混合精度"的训练。它控制 
 ``update()`` 更新缩放比例。
 ``minimize()`` 与 ``optimizer.minimize()`` 类似，执行参数的更新，同时更新缩放比例 loss_scaling，等效与 ``step()`` + ``update()``。
 
-通常，GradScaler 和  ``paddle.amp.auto_cast``  一起使用，来实现动态图模式下的"自动混合精度"。
+通常，GradScaler 和 ``paddle.amp.auto_cast`` 一起使用，来实现动态图模式下的"自动混合精度"。
 
+本 API 支持三种调用方式：
+
+1. ``GradScaler(enable=True, init_loss_scaling=2.0**16, incr_ratio=2.0, decr_ratio=0.5, incr_every_n_steps=2000, decr_every_n_nan_or_inf=1, use_dynamic_loss_scaling=True)``
+
+2. ``GradScaler(device, init_scale=2.0**16, growth_factor=2.0, backoff_factor=0.5, growth_interval=2000, enabled=True)``
+
+3. ``GradScaler(init_scale=2.0**16, growth_factor=2.0, backoff_factor=0.5, growth_interval=2000, enabled=True)``
 
 参数
 :::::::::
-    - **enable** (bool，可选) - 是否使用 loss scaling。默认值为 True。
-    - **init_loss_scaling** (float，可选) - 初始 loss scaling 因子。默认值为 65536.0。
-    - **incr_ratio** (float，可选) - 增大 loss scaling 时使用的乘数。默认值为 2.0。
-    - **decr_ratio** (float，可选) - 减小 loss scaling 时使用的小于 1 的乘数。默认值为 0.5。
-    - **incr_every_n_steps** (int，可选) - 连续 n 个 steps 的梯度都是有限值时，增加 loss scaling。默认值为 2000。
+    - **enable** (bool，可选) - 是否使用 loss scaling。默认值为 True。别名 ``enabled``。
+    - **init_loss_scaling** (float，可选) - 初始 loss scaling 因子。默认值为 65536.0。别名 ``init_scale``。
+    - **incr_ratio** (float，可选) - 增大 loss scaling 时使用的乘数。默认值为 2.0。别名 ``growth_factor``。
+    - **decr_ratio** (float，可选) - 减小 loss scaling 时使用的小于 1 的乘数。默认值为 0.5。别名 ``backoff_factor``。
+    - **incr_every_n_steps** (int，可选) - 连续 n 个 steps 的梯度都是有限值时，增加 loss scaling。默认值为 2000。别名 ``growth_interval``。
     - **decr_every_n_nan_or_inf** (int，可选) - 累计出现 n 个 steps 的梯度为 nan 或者 inf 时，减小 loss scaling。默认值为 1。
     - **use_dynamic_loss_scaling** (bool，可选) - 是否使用动态的 loss scaling。如果不使用，则使用固定的 loss scaling；如果使用，则会动态更新 loss scaling。默认值为 True。
 
@@ -60,15 +67,15 @@ COPY-FROM: paddle.amp.GradScaler.scale
 minimize(optimizer, args, kwargs)
 '''''''''
 
-这个函数与  ``optimizer.minimize()``  类似，用于执行参数更新。
+这个函数与 ``optimizer.minimize()`` 类似，用于执行参数更新。
 如果参数缩放后的梯度包含 NAN 或者 INF，则跳过参数更新。否则，首先让缩放过梯度的参数取消缩放，然后更新参数。
 最终，更新 loss scaling 的比例。
 
 **参数**
 
     - **optimizer** (Optimizer) - 用于更新参数的优化器。
-    - **args** - 参数，将会被传递给  ``optimizer.minimize()``  。
-    - **kwargs** - 关键词参数，将会被传递给  ``optimizer.minimize()``  。
+    - **args** - 参数，将会被传递给 ``optimizer.minimize()`` 。
+    - **kwargs** - 关键词参数，将会被传递给 ``optimizer.minimize()`` 。
 
 **代码示例**
 
@@ -77,9 +84,9 @@ COPY-FROM: paddle.amp.GradScaler.minimize
 step(optimizer)
 '''''''''
 
-这个函数与  ``optimizer.step()``  类似，用于执行参数更新。
+这个函数与 ``optimizer.step()`` 类似，用于执行参数更新。
 如果参数缩放后的梯度包含 NAN 或者 INF，则跳过参数更新。否则，首先让缩放过梯度的参数取消缩放，然后更新参数。
-该函数与  ``update()``  函数一起使用，效果等同于  ``minimize()`` 。
+该函数与 ``update()`` 函数一起使用，效果等同于 ``minimize()``。
 
 **参数**
 
@@ -89,10 +96,14 @@ step(optimizer)
 
 COPY-FROM: paddle.amp.GradScaler.step
 
-update()
+update(new_scale=None)
 '''''''''
 
-更新缩放比例。
+更新 loss scaling 比例。
+
+**参数**
+
+- **new_scale** (float，可选) - 新的 loss scaling 因子。如果提供，loss scaling 因子将直接设置为 ``new_scale`` 并重置内部步数计数。默认值为 None。
 
 **代码示例**
 
@@ -102,8 +113,8 @@ unscale_(optimizer)
 '''''''''
 
 将参数的梯度除去缩放比例。
-如果在  ``step()``  调用前调用  ``unscale_()`` ，则  ``step()``  不会重复调用  ``unscale()`` ，否则  ``step()``  将先执行  ``unscale_()``  再做参数更新。
- ``minimize()``  用法同上。
+如果在 ``step()`` 调用前调用 ``unscale_()``，则 ``step()`` 不会重复调用 ``unscale()``，否则 ``step()`` 将先执行 ``unscale_()`` 再做参数更新。
+``minimize()`` 用法同上。
 
 **参数**
 
@@ -289,8 +300,21 @@ load_state_dict(state_dict)
 
 **参数**
 
-- **state_dict** (dict) - 用于设置或更新 GradScaler 对象的属性参数，dict 需要是 ``GradScaler.state_dict()`` 的返回值。
+- **state_dict** (dict) - 用于设置或更新 GradScaler 对象的属性参数，dict 需要是``GradScaler.state_dict()``的返回值。
 
 **代码示例**
 
 COPY-FROM: paddle.amp.GradScaler.load_state_dict
+
+get_scale()
+'''''''''
+
+返回当前的缩放因子，类型为 Python float。如果 loss scaling 未启用，则返回 0.0。
+
+**返回**
+
+float，当前 loss scaling 因子，如果禁用则返回 0.0。
+
+**代码示例**
+
+COPY-FROM: paddle.amp.GradScaler.get_scale

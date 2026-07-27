@@ -62,7 +62,7 @@ public:
   LODTensor LODSliceShared(int level, int elem_begin, int elem_end) const;
 
   // copy other's lod_start_pos_, to share LOD info.
-  // NOTE the LOD info sould not be changed.
+  // NOTE the LOD info could not be changed.
   void ShareConstLODFrom(const LODTensor &other) {
     lod_start_pos_ = other.lod_start_pos_;
   }
@@ -198,7 +198,7 @@ std::vector<SortedSeqItem> SortBySeqLen(const LODTensor& tensor);
 由于输入序列的顺序变化，以下现有的接口需要针对性地修改：
 
 - InitMemories, memory 需要根据 `sorted_seqs` 重新排列
-- SetmentInputs
+- SegmentInputs
 - ConcatOutputs
 
 此外，由于 `sorted_seqs` 需要被 `RecurrentGradientOp` 复用，因此会变成 `RecurrentOp` 一个新的 output 输出，
@@ -233,9 +233,9 @@ x    x
 - 将每个序列 concat 为规则的 mini-batch 表示
 
 ## 参考文献
-[TensorFlow Bucketing](https://www.tensorflow.org/versions/r0.12/api_docs/python/contrib.training/bucketing)
+[TensorFlow Bucketing](https://www.tensorflow.org/api_docs/python/tf/data/experimental/bucket_by_sequence_length)
 
-[mxnet Bucketing](http://mxnet.io/how_to/bucketing.html)
+[mxnet Bucketing](https://mxnet.apache.org/versions/1.6/api/python/docs/api/module/index.html#mxnet.module.BucketingModule)
 
 [variable length input in RNN scenario](https://discuss.pytorch.org/t/about-the-variable-length-input-in-rnn-scenario/345/5)
 
